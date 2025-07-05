@@ -1,22 +1,24 @@
-# Welcome to your Lovable project
+# Enshift Digital - E-Commerce Demo
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/b47a3e10-e813-4b4b-a2d7-125fc9b598ce
+A modern, fully-responsive e-commerce application built with React and TypeScript. This demo showcases the capabilities of Enshift Digital web agency, featuring cutting-edge design, smooth animations, and best practices in modern web development.
+
+## Features
+
+- **Responsive Design**: Optimized for all devices from mobile to desktop
+- **Modern UI/UX**: Clean, professional design with smooth animations
+- **TypeScript**: Full type safety and developer experience
+- **Performance Optimized**: Fast loading times and smooth interactions
+- **Accessibility**: Built with web accessibility standards in mind
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/b47a3e10-e813-4b4b-a2d7-125fc9b598ce) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +64,11 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/b47a3e10-e813-4b4b-a2d7-125fc9b598ce) and click on Share -> Publish.
+You can deploy this project using various hosting platforms like Vercel, Netlify, or any static hosting service.
 
-## Can I connect a custom domain to my Lovable project?
+Build the project with:
+```sh
+npm run build
+```
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Then upload the `dist` folder to your hosting provider.
