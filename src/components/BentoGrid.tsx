@@ -1,9 +1,14 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { animateBentoGrid } from '@/lib/gsap';
 
 const BentoGrid = () => {
+  useEffect(() => {
+    animateBentoGrid();
+  }, []);
+
   const gridItems = [
     {
       id: 1,
@@ -61,37 +66,38 @@ const BentoGrid = () => {
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[200px]">
+        <div className="bento-grid grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[200px]">
           {gridItems.map((item) => (
             <Link
               key={item.id}
               to={item.link}
-              className={`group relative overflow-hidden rounded-3xl ${item.className} transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl`}
+              className={`bento-item group relative overflow-hidden rounded-3xl ${item.className} transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:z-10`}
             >
-              {/* Background Image */}
+              {/* Background Image with Parallax */}
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{ backgroundImage: `url(${item.image})` }}
+                data-speed="0.5"
               />
               
               {/* Glass Overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/40 group-hover:from-black/30 group-hover:to-black/50 transition-all duration-500" />
               
               {/* Glass Card */}
-              <div className="absolute inset-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 flex flex-col justify-end transform transition-all duration-500 group-hover:bg-white/20 group-hover:border-white/30">
+              <div className="absolute inset-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 flex flex-col justify-end transform transition-all duration-500 group-hover:bg-white/20 group-hover:border-white/30 group-hover:backdrop-blur-lg">
                 <div className="text-white">
-                  <p className="text-sm font-medium opacity-80 mb-2">{item.subtitle}</p>
-                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                  <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-sm font-medium opacity-80 mb-2 transform transition-transform duration-300 group-hover:translate-y-[-2px]">{item.subtitle}</p>
+                  <h3 className="text-xl font-bold mb-3 transform transition-transform duration-300 group-hover:translate-y-[-2px]">{item.title}</h3>
+                  <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     <span className="text-sm font-medium">Explore</span>
                     <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </div>
 
-              {/* Grain Texture Overlay */}
+              {/* Animated Grain Texture Overlay */}
               <div 
-                className="absolute inset-0 opacity-20 mix-blend-overlay"
+                className="absolute inset-0 opacity-20 mix-blend-overlay transition-opacity duration-300 group-hover:opacity-30"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
                 }}

@@ -135,6 +135,31 @@ All colors MUST be HSL.
   .animate-pulse-slow {
     animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
+
+  /* GSAP ScrollSmoother */
+  #smooth-wrapper {
+    overflow: hidden;
+  }
+
+  #smooth-content {
+    overflow: visible;
+    width: 100%;
+  }
+
+  /* Magnetic button base styles */
+  .magnetic-btn {
+    cursor: pointer;
+    will-change: transform;
+  }
+
+  /* Enhanced hover effects */
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  }
 }
 
 @keyframes float {
@@ -176,4 +201,32 @@ html {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* GSAP performance optimizations */
+.gsap-element {
+  will-change: transform, opacity;
+}
+
+/* Preload critical animations */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-badge,
+  .hero-title,
+  .hero-subtitle,
+  .hero-buttons,
+  .hero-stats,
+  .bento-item,
+  .product-card {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

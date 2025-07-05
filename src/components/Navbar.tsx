@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu, User, Search } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { animateNavbar } from '@/lib/gsap';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,6 +12,8 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
+    animateNavbar();
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -30,7 +33,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`navbar fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg'
           : 'bg-transparent'
@@ -67,19 +70,19 @@ const Navbar = () => {
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
-            <button className="p-2 text-gray-700 hover:text-blue-600 transition-colors">
+            <button className="p-2 text-gray-700 hover:text-blue-600 transition-colors hover:scale-110 transform duration-200">
               <Search className="w-5 h-5" />
             </button>
-            <button className="p-2 text-gray-700 hover:text-blue-600 transition-colors">
+            <button className="p-2 text-gray-700 hover:text-blue-600 transition-colors hover:scale-110 transform duration-200">
               <User className="w-5 h-5" />
             </button>
             <Link
               to="/cart"
-              className="relative p-2 text-gray-700 hover:text-blue-600 transition-colors"
+              className="relative p-2 text-gray-700 hover:text-blue-600 transition-colors hover:scale-110 transform duration-200"
             >
               <ShoppingBag className="w-5 h-5" />
               {state.itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
                   {state.itemCount}
                 </span>
               )}
