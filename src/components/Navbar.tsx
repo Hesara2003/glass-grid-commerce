@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu, User, Search } from 'lucide-react';
@@ -33,64 +32,66 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`navbar fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`navbar fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg'
+          ? 'glass-nav shadow-lg'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">G</span>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-20">
+          {/* Enhanced logo */}
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="w-10 h-10 glass-card flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <span className="text-white font-bold text-lg bg-gradient-to-br from-blue-600 to-purple-600 bg-clip-text text-transparent">G</span>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
               GlassGrid
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Enhanced desktop navigation */}
+          <div className="hidden md:flex items-center space-x-12">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative text-sm font-medium transition-colors duration-200 ${
+                className={`relative text-sm font-medium transition-all duration-300 ${
                   isActive(link.path)
                     ? 'text-blue-600'
-                    : 'text-gray-700 hover:text-blue-600'
-                } after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-blue-600 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left`}
+                    : 'text-slate-700 hover:text-blue-600'
+                } after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-gradient-to-r after:from-blue-600 after:to-purple-600 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
+                  isActive(link.path) ? 'after:scale-x-100' : ''
+                }`}
               >
                 {link.name}
               </Link>
             ))}
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center space-x-4">
-            <button className="p-2 text-gray-700 hover:text-blue-600 transition-colors hover:scale-110 transform duration-200">
+          {/* Enhanced action buttons */}
+          <div className="flex items-center space-x-2">
+            <button className="p-3 glass-subtle rounded-xl text-slate-700 hover:text-blue-600 hover:glass-card transition-all duration-300 hover:scale-110">
               <Search className="w-5 h-5" />
             </button>
-            <button className="p-2 text-gray-700 hover:text-blue-600 transition-colors hover:scale-110 transform duration-200">
+            <button className="p-3 glass-subtle rounded-xl text-slate-700 hover:text-blue-600 hover:glass-card transition-all duration-300 hover:scale-110">
               <User className="w-5 h-5" />
             </button>
             <Link
               to="/cart"
-              className="relative p-2 text-gray-700 hover:text-blue-600 transition-colors hover:scale-110 transform duration-200"
+              className="relative p-3 glass-subtle rounded-xl text-slate-700 hover:text-blue-600 hover:glass-card transition-all duration-300 hover:scale-110"
             >
               <ShoppingBag className="w-5 h-5" />
               {state.itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center animate-pulse shadow-lg">
                   {state.itemCount}
                 </span>
               )}
             </Link>
 
-            {/* Mobile Menu Button */}
+            {/* Enhanced mobile menu button */}
             <button
-              className="md:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors"
+              className="md:hidden p-3 glass-subtle rounded-xl text-slate-700 hover:text-blue-600 hover:glass-card transition-all duration-300"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <Menu className="w-5 h-5" />
@@ -98,18 +99,18 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Enhanced mobile menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-white/20 shadow-lg">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden glass-strong border-t border-white/10 shadow-xl rounded-b-2xl mt-2">
+            <div className="px-4 pt-4 pb-6 space-y-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
+                  className={`block px-4 py-3 text-base font-medium rounded-xl transition-all duration-300 ${
                     isActive(link.path)
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                      ? 'text-blue-600 glass-card'
+                      : 'text-slate-700 hover:text-blue-600 hover:glass-subtle'
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

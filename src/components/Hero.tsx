@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { animateHero, animateGrainTexture } from '@/lib/gsap';
 
@@ -11,91 +11,96 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden grain-texture">
+      {/* Refined background with subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 via-white to-blue-50/30" />
+      
+      {/* Enhanced grid pattern */}
+      <div className="absolute inset-0 opacity-[0.015]">
         <div 
           className="w-full h-full"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.5) 1px, transparent 0)`,
-            backgroundSize: '24px 24px'
+            backgroundImage: `
+              radial-gradient(circle at 25px 25px, rgba(0,0,0,0.3) 2px, transparent 0),
+              radial-gradient(circle at 75px 75px, rgba(0,0,0,0.15) 1px, transparent 0)
+            `,
+            backgroundSize: '100px 100px, 50px 50px'
           }}
         />
       </div>
 
-      {/* Animated Glass Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      {/* Floating glass orbs with refined positioning */}
+      <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse" 
+           style={{ animationDuration: '4s' }} />
+      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-pulse" 
+           style={{ animationDelay: '2s', animationDuration: '6s' }} />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-cyan-400/10 to-indigo-400/10 rounded-full blur-2xl animate-pulse"
+           style={{ animationDelay: '1s', animationDuration: '5s' }} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="space-y-8">
-          {/* Badge */}
-          <div className="hero-badge inline-flex items-center px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border border-white/20 shadow-lg">
-            <span className="text-sm font-medium text-gray-700">✨ New Collection Available</span>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+        <div className="space-y-12">
+          {/* Premium badge with enhanced glass effect */}
+          <div className="hero-badge inline-flex items-center gap-2 px-6 py-3 glass-card shadow-lg">
+            <Sparkles className="w-4 h-4 text-blue-600" />
+            <span className="text-sm font-medium text-slate-700">Premium Collection 2024</span>
           </div>
 
-          {/* Main Heading */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight">
-            <span className="hero-title block bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">
-              Premium Products
-            </span>
-            <span className="hero-title block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Glass Design
-            </span>
-          </h1>
+          {/* Enhanced typography hierarchy */}
+          <div className="space-y-6">
+            <h1 className="text-display">
+              <span className="hero-title block bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent mb-2">
+                Crafted for
+              </span>
+              <span className="hero-title block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                Modern Living
+              </span>
+            </h1>
 
-          {/* Subtitle */}
-          <p className="hero-subtitle max-w-2xl mx-auto text-lg sm:text-xl text-gray-600 leading-relaxed">
-            Discover our curated collection of premium products with modern glass design aesthetics. Experience the future of shopping.
-          </p>
+            <p className="hero-subtitle text-body max-w-2xl mx-auto text-slate-600 text-lg md:text-xl leading-relaxed">
+              Discover our meticulously curated collection of premium products, 
+              designed with precision and crafted for the discerning individual.
+            </p>
+          </div>
 
-          {/* CTA Buttons */}
-          <div className="hero-buttons flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+          {/* Refined CTA section */}
+          <div className="hero-buttons flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
             <Link
               to="/shop"
-              className="magnetic-btn group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="magnetic-btn group btn-primary hover-glow"
             >
-              <span className="flex items-center space-x-2">
+              <span className="flex items-center gap-3">
                 <span>Explore Collection</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </Link>
             
-            <button className="magnetic-btn px-8 py-4 bg-white/40 backdrop-blur-md border border-white/20 text-gray-700 rounded-2xl font-semibold shadow-lg hover:shadow-xl hover:bg-white/60 transition-all duration-300 transform hover:scale-105">
-              Watch Demo
+            <button className="magnetic-btn btn-glass hover-glow">
+              <span>Watch Lookbook</span>
             </button>
           </div>
 
-          {/* Stats */}
-          <div className="hero-stats pt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">1000+</div>
-              <div className="text-sm text-gray-600 mt-1">Products</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">50k+</div>
-              <div className="text-sm text-gray-600 mt-1">Customers</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">4.9</div>
-              <div className="text-sm text-gray-600 mt-1">Rating</div>
-            </div>
+          {/* Enhanced stats with refined spacing */}
+          <div className="hero-stats pt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
+            {[
+              { number: '2,000+', label: 'Curated Products' },
+              { number: '100k+', label: 'Satisfied Customers' },
+              { number: '4.9', label: 'Customer Rating' }
+            ].map((stat, index) => (
+              <div key={index} className="text-center space-y-2">
+                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-br from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                  {stat.number}
+                </div>
+                <div className="text-caption">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Animated Grain Texture */}
-      <div 
-        className="grain-texture absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-        }}
-      />
-
-      {/* Scroll Indicator */}
+      {/* Enhanced scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-bounce" />
+        <div className="glass-subtle w-8 h-12 rounded-full flex justify-center items-start pt-3">
+          <div className="w-1 h-3 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full animate-bounce" />
         </div>
       </div>
     </section>

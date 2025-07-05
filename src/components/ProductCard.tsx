@@ -1,6 +1,5 @@
-
 import React, { useEffect, useRef } from 'react';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, Heart } from 'lucide-react';
 import { Product, useCart } from '@/context/CartContext';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -15,27 +14,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const addToCartRef = useRef<HTMLButtonElement>(null);
+  const favoriteRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (!cardRef.current || !imageRef.current || !addToCartRef.current) return;
+    if (!cardRef.current || !imageRef.current || !addToCartRef.current || !favoriteRef.current) return;
 
     const card = cardRef.current;
     const image = imageRef.current;
-    const button = addToCartRef.current;
+    const addButton = addToCartRef.current;
+    const favoriteButton = favoriteRef.current;
 
-    // Card hover animation
+    // Enhanced card hover animation
     const handleCardEnter = () => {
       gsap.to(card, {
-        y: -8,
+        y: -12,
         scale: 1.02,
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        duration: 0.3,
-        ease: 'power2.out'
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(59, 130, 246, 0.1)',
+        duration: 0.4,
+        ease: 'power3.out'
       });
       
       gsap.to(image, {
-        scale: 1.1,
-        duration: 0.5,
+        scale: 1.08,
+        duration: 0.6,
         ease: 'power2.out'
       });
     };
@@ -44,14 +45,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       gsap.to(card, {
         y: 0,
         scale: 1,
-        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-        duration: 0.3,
-        ease: 'power2.out'
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        duration: 0.4,
+        ease: 'power3.out'
       });
       
       gsap.to(image, {
         scale: 1,
-        duration: 0.5,
+        duration: 0.6,
         ease: 'power2.out'
       });
     };
@@ -59,13 +60,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     card.addEventListener('mouseenter', handleCardEnter);
     card.addEventListener('mouseleave', handleCardLeave);
 
-    // Magnetic button effect
-    const cleanupMagnetic = magneticButton(button);
+    // Magnetic button effects
+    const cleanupMagneticAdd = magneticButton(addButton);
+    const cleanupMagneticFav = magneticButton(favoriteButton);
 
     return () => {
       card.removeEventListener('mouseenter', handleCardEnter);
       card.removeEventListener('mouseleave', handleCardLeave);
-      cleanupMagnetic();
+      cleanupMagneticAdd();
+      cleanupMagneticFav();
     };
   }, []);
 
@@ -73,10 +76,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Add cart animation
     if (addToCartRef.current) {
       gsap.to(addToCartRef.current, {
-        scale: 0.9,
+        scale: 0.85,
         duration: 0.1,
         yoyo: true,
         repeat: 1,
@@ -88,76 +90,83 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <Link
-      to={`/product/${product.id}`}
-      className="product-card block"
-    >
+    <Link to={`/product/${product.id}`} className="product-card block">
       <div
         ref={cardRef}
-        className="group relative bg-white/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 shadow-lg transition-all duration-300"
+        className="group relative glass-card p-8 transition-all duration-500 hover-glow grain-texture"
       >
-        {/* Product Image */}
-        <div className="relative overflow-hidden rounded-2xl mb-6 aspect-square">
-          <div
-            ref={imageRef}
-            className="w-full h-full"
-          >
+        {/* Enhanced product image container */}
+        <div className="relative overflow-hidden rounded-2xl mb-8 aspect-square">
+          <div ref={imageRef} className="w-full h-full">
             <img
               src={product.image}
               alt={product.name}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
           
-          {/* Glass Overlay on Hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm" />
+          {/* Enhanced overlay with glass effect */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[1px]" />
           
-          {/* Add to Cart Button (slides in on hover) */}
-          <button
-            ref={addToCartRef}
-            onClick={handleAddToCart}
-            className="absolute bottom-4 right-4 p-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-white/30 hover:scale-110"
-          >
-            <ShoppingBag className="w-5 h-5" />
-          </button>
+          {/* Action buttons with refined positioning */}
+          <div className="absolute top-4 right-4 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-400">
+            <button
+              ref={favoriteRef}
+              className="p-3 glass-strong rounded-full text-white hover:text-red-400 transition-colors duration-300 hover:scale-110"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+            >
+              <Heart className="w-5 h-5" />
+            </button>
+            <button
+              ref={addToCartRef}
+              onClick={handleAddToCart}
+              className="p-3 glass-strong rounded-full text-white hover:text-blue-400 transition-colors duration-300 hover:scale-110"
+            >
+              <ShoppingBag className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        {/* Product Info */}
-        <div className="space-y-3">
+        {/* Enhanced product information */}
+        <div className="space-y-4">
+          {/* Category and rating with refined styling */}
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full transition-colors group-hover:bg-blue-100">
+            <span className="text-xs font-medium text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full transition-colors group-hover:bg-blue-100">
               {product.category}
             </span>
-            <div className="flex items-center space-x-1">
-              <span className="text-yellow-400">★</span>
-              <span className="text-sm text-gray-600">{product.rating}</span>
-              <span className="text-sm text-gray-400">({product.reviews})</span>
+            <div className="flex items-center space-x-1.5">
+              <span className="text-yellow-400 text-sm">★</span>
+              <span className="text-sm font-medium text-slate-700">{product.rating}</span>
+              <span className="text-sm text-slate-500">({product.reviews})</span>
             </div>
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+          {/* Product title with enhanced typography */}
+          <h3 className="text-title text-slate-900 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
             {product.name}
           </h3>
 
-          <p className="text-sm text-gray-600 line-clamp-2">
+          {/* Description with refined spacing */}
+          <p className="text-caption leading-relaxed line-clamp-2">
             {product.description}
           </p>
 
+          {/* Price and shipping with enhanced layout */}
           <div className="flex items-center justify-between pt-2">
-            <span className="text-2xl font-bold text-gray-900 group-hover:scale-105 transition-transform">
-              ${product.price}
+            <div className="space-y-1">
+              <span className="text-3xl font-bold text-slate-900 group-hover:scale-105 transition-transform duration-300">
+                ${product.price}
+              </span>
+            </div>
+            <span className="text-xs text-slate-500 bg-slate-50 px-2 py-1 rounded-lg">
+              Free shipping
             </span>
-            <span className="text-sm text-gray-500">Free shipping</span>
           </div>
         </div>
-
-        {/* Animated Grain Texture Overlay */}
-        <div 
-          className="absolute inset-0 opacity-5 mix-blend-overlay rounded-3xl transition-opacity duration-300 group-hover:opacity-10"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-          }}
-        />
       </div>
     </Link>
   );
