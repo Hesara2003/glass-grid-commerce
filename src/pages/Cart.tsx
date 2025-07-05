@@ -38,17 +38,17 @@ const Cart = () => {
 
   if (state.items.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 md:px-6 lg:px-4 py-12 md:py-16">
         <div className="text-center max-w-md mx-auto">
-          <div className="mb-6">
-            <ShoppingBag className="w-24 h-24 mx-auto text-muted-foreground" />
+          <div className="mb-4 md:mb-6">
+            <ShoppingBag className="w-16 h-16 md:w-24 md:h-24 mx-auto text-muted-foreground" />
           </div>
-          <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
-          <p className="text-muted-foreground mb-8">
+          <h1 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Your cart is empty</h1>
+          <p className="text-muted-foreground mb-6 md:mb-8 text-sm md:text-base">
             Looks like you haven't added any items to your cart yet. Start shopping to fill it up!
           </p>
           <Link to="/shop">
-            <Button size="lg" className="group">
+            <Button size="lg" className="group h-12 md:h-14 px-6 md:px-8 text-sm md:text-base">
               Start Shopping
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -59,33 +59,33 @@ const Cart = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Shopping Cart</h1>
-        <p className="text-muted-foreground">
+    <div className="container mx-auto px-4 md:px-6 lg:px-4 py-6 md:py-8">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Shopping Cart</h1>
+        <p className="text-muted-foreground text-sm md:text-base">
           Review your items and proceed to checkout
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         {/* Cart Items */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">
+        <div className="lg:col-span-2 space-y-4 md:space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 md:gap-4">
+            <h2 className="text-lg md:text-xl font-semibold">
               Cart Items ({state.itemCount})
             </h2>
-            <Button variant="outline" size="sm" onClick={handleClearCart}>
+            <Button variant="outline" size="sm" onClick={handleClearCart} className="w-full sm:w-auto">
               Clear Cart
             </Button>
           </div>
 
           <div className="space-y-4">
             {state.items.map((item, index) => (
-              <Card key={`${item.product.id}-${item.selectedSize}-${item.selectedColor}-${index}`}>
-                <CardContent className="p-6">
-                  <div className="flex gap-4">
+              <Card key={`${item.product.id}-${item.selectedSize}-${item.selectedColor}-${index}`} className="overflow-hidden">
+                <CardContent className="p-4 md:p-6">
+                  <div className="flex flex-col sm:flex-row gap-4">
                     {/* Product Image */}
-                    <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted shrink-0">
+                    <div className="w-full sm:w-20 md:w-24 h-20 md:h-24 rounded-lg overflow-hidden bg-muted shrink-0 mx-auto sm:mx-0">
                       <img
                         src={item.product.images[0]}
                         alt={item.product.name}
@@ -94,10 +94,10 @@ const Cart = () => {
                     </div>
 
                     {/* Product Details */}
-                    <div className="flex-1 space-y-2">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h3 className="font-semibold">
+                    <div className="flex-1 space-y-3 md:space-y-2">
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-sm md:text-base leading-tight">
                             <Link 
                               to={`/product/${item.product.id}`}
                               className="hover:text-primary transition-colors"
@@ -105,14 +105,14 @@ const Cart = () => {
                               {item.product.name}
                             </Link>
                           </h3>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-xs md:text-sm text-muted-foreground">
                             {item.product.brand}
                           </p>
                         </div>
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="text-muted-foreground hover:text-destructive"
+                          className="text-muted-foreground hover:text-destructive h-8 w-8 md:h-10 md:w-10 self-start"
                           onClick={() => handleRemoveItem(
                             item.product.id, 
                             item.selectedSize, 
@@ -124,7 +124,7 @@ const Cart = () => {
                       </div>
 
                       {/* Selected Options */}
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap gap-2">
                         {item.selectedSize && (
                           <Badge variant="secondary" className="text-xs">
                             Size: {item.selectedSize}
@@ -138,9 +138,9 @@ const Cart = () => {
                       </div>
 
                       {/* Quantity and Price */}
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm text-muted-foreground">Qty:</span>
+                          <span className="text-xs md:text-sm text-muted-foreground">Qty:</span>
                           <div className="flex items-center border rounded-lg">
                             <Button
                               variant="ghost"
@@ -175,8 +175,8 @@ const Cart = () => {
                           </div>
                         </div>
 
-                        <div className="text-right">
-                          <div className="font-semibold">
+                        <div className="text-left sm:text-right">
+                          <div className="font-semibold text-sm md:text-base">
                             ${(item.product.price * item.quantity).toFixed(2)}
                           </div>
                           {item.quantity > 1 && (
@@ -197,17 +197,17 @@ const Cart = () => {
         {/* Order Summary */}
         <div className="lg:col-span-1">
           <Card className="sticky top-4">
-            <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
+            <CardHeader className="pb-4">
+              <CardTitle className="text-lg md:text-xl">Order Summary</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span>Subtotal ({state.itemCount} items)</span>
                   <span>${state.total.toFixed(2)}</span>
                 </div>
                 
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span>Shipping</span>
                   <span>
                     {shippingCost === 0 ? (
@@ -218,13 +218,13 @@ const Cart = () => {
                   </span>
                 </div>
                 
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span>Tax</span>
                   <span>${tax.toFixed(2)}</span>
                 </div>
                 
                 {state.total < 50 && (
-                  <div className="text-xs text-muted-foreground p-2 bg-muted rounded">
+                  <div className="text-xs md:text-sm text-muted-foreground p-3 bg-muted rounded-lg">
                     Add ${(50 - state.total).toFixed(2)} more for free shipping!
                   </div>
                 )}
@@ -232,21 +232,21 @@ const Cart = () => {
 
               <Separator />
 
-              <div className="flex justify-between font-semibold text-lg">
+              <div className="flex justify-between font-semibold text-base md:text-lg">
                 <span>Total</span>
                 <span>${finalTotal.toFixed(2)}</span>
               </div>
 
               <div className="space-y-3">
                 <Link to="/checkout" className="block">
-                  <Button size="lg" className="w-full">
+                  <Button size="lg" className="w-full h-12 md:h-14 text-sm md:text-base">
                     Proceed to Checkout
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
                 
                 <Link to="/shop" className="block">
-                  <Button variant="outline" size="lg" className="w-full">
+                  <Button variant="outline" size="lg" className="w-full h-12 md:h-14 text-sm md:text-base">
                     Continue Shopping
                   </Button>
                 </Link>
@@ -254,17 +254,17 @@ const Cart = () => {
 
               {/* Security Features */}
               <div className="pt-4 border-t">
-                <div className="space-y-2 text-xs text-muted-foreground">
+                <div className="space-y-2 text-xs md:text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full" />
+                    <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0" />
                     <span>Secure checkout</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                    <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />
                     <span>Free returns within 30 days</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full" />
+                    <div className="w-2 h-2 bg-purple-500 rounded-full flex-shrink-0" />
                     <span>24/7 customer support</span>
                   </div>
                 </div>
