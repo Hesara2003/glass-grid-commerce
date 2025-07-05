@@ -172,16 +172,16 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <div className="glass-card rounded-3xl p-16 backdrop-blur-xl border-0">
-          <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+      <div className="container mx-auto px-4 md:px-6 lg:px-4 py-12 md:py-16 text-center">
+        <div className="glass-card rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 backdrop-blur-xl border-0">
+          <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
             Product not found
           </h1>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-muted-foreground mb-6 md:mb-8 text-sm md:text-base">
             The product you're looking for doesn't exist or has been removed.
           </p>
           <Link to="/shop">
-            <Button size="lg" className="glass-hover rounded-2xl">
+            <Button size="lg" className="glass-hover rounded-xl md:rounded-2xl text-sm md:text-base h-12 md:h-14 px-6 md:px-8">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Shop
             </Button>
@@ -283,25 +283,25 @@ const ProductDetail = () => {
   };
 
   return (
-    <div ref={containerRef} className="container mx-auto px-4 py-8 min-h-screen" style={{ scrollBehavior: 'smooth' }}>
+    <div ref={containerRef} className="container mx-auto px-4 md:px-6 lg:px-4 py-6 md:py-8 min-h-screen" style={{ scrollBehavior: 'smooth' }}>
       {/* Enhanced Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8 glass-light rounded-full px-6 py-3 backdrop-blur-md border-0 w-fit">
-        <Link to="/" className="text-foreground/70 hover:text-primary transition-colors duration-300">Home</Link>
-        <ChevronRight className="w-3 h-3 text-foreground/50" />
-        <Link to="/shop" className="text-foreground/70 hover:text-primary transition-colors duration-300">Shop</Link>
-        <ChevronRight className="w-3 h-3 text-foreground/50" />
-        <Link to={`/shop?category=${product.category}`} className="text-foreground/70 hover:text-primary transition-colors duration-300 capitalize">
+      <div className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-muted-foreground mb-6 md:mb-8 glass-light rounded-full px-4 md:px-6 py-2 md:py-3 backdrop-blur-md border-0 w-fit overflow-x-auto">
+        <Link to="/" className="text-foreground/70 hover:text-primary transition-colors duration-300 whitespace-nowrap">Home</Link>
+        <ChevronRight className="w-3 h-3 text-foreground/50 flex-shrink-0" />
+        <Link to="/shop" className="text-foreground/70 hover:text-primary transition-colors duration-300 whitespace-nowrap">Shop</Link>
+        <ChevronRight className="w-3 h-3 text-foreground/50 flex-shrink-0" />
+        <Link to={`/shop?category=${product.category}`} className="text-foreground/70 hover:text-primary transition-colors duration-300 capitalize whitespace-nowrap">
           {product.category}
         </Link>
-        <ChevronRight className="w-3 h-3 text-foreground/50" />
-        <span className="text-foreground font-medium">{product.name}</span>
+        <ChevronRight className="w-3 h-3 text-foreground/50 flex-shrink-0" />
+        <span className="text-foreground font-medium truncate">{product.name}</span>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-16 mb-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-16 md:mb-20 lg:mb-24">
         {/* Enhanced Product Images */}
-        <div ref={imageRef} className="space-y-6">
+        <div ref={imageRef} className="space-y-4 md:space-y-6">
           {/* Main Image */}
-          <div className="aspect-square rounded-3xl overflow-hidden glass-card border-0 backdrop-blur-xl shadow-2xl relative group">
+          <div className="aspect-square rounded-2xl md:rounded-3xl overflow-hidden glass-card border-0 backdrop-blur-xl shadow-2xl relative group">
             <img
               src={product.images[selectedImage]}
               alt={product.name}
@@ -312,7 +312,7 @@ const ProductDetail = () => {
             
             {/* Discount Badge */}
             {discountPercentage > 0 && (
-              <Badge className="absolute top-6 left-6 glass-strong border-0 backdrop-blur-md pulse-badge">
+              <Badge className="absolute top-3 md:top-6 left-3 md:left-6 glass-strong border-0 backdrop-blur-md pulse-badge text-xs md:text-sm">
                 <Zap className="w-3 h-3 mr-1" />
                 -{discountPercentage}% OFF
               </Badge>
@@ -321,12 +321,12 @@ const ProductDetail = () => {
 
           {/* Enhanced Image Thumbnails */}
           {product.images.length > 1 && (
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4 gap-2 md:gap-4">
               {product.images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`aspect-square rounded-2xl overflow-hidden transition-all duration-300 ${
+                  className={`aspect-square rounded-xl md:rounded-2xl overflow-hidden transition-all duration-300 ${
                     selectedImage === index 
                       ? 'ring-2 ring-primary ring-offset-2 ring-offset-background scale-105 shadow-lg' 
                       : 'glass-light hover:glass hover:scale-105'
@@ -344,24 +344,24 @@ const ProductDetail = () => {
         </div>
 
         {/* Enhanced Product Info */}
-        <div ref={infoRef} className="space-y-8">
+        <div ref={infoRef} className="space-y-6 md:space-y-8">
           {/* Header Section */}
-          <div className="space-y-4">
-            <Badge variant="secondary" className="glass-card border-0 backdrop-blur-md">
+          <div className="space-y-3 md:space-y-4">
+            <Badge variant="secondary" className="glass-card border-0 backdrop-blur-md text-xs md:text-sm">
               <Award className="w-3 h-3 mr-1" />
               {product.brand}
             </Badge>
-            <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent leading-tight">
               {product.name}
             </h1>
             
             {/* Enhanced Rating */}
-            <div className="flex items-center gap-4 glass-light rounded-2xl p-4 backdrop-blur-md border-0">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-4 glass-light rounded-xl md:rounded-2xl p-3 md:p-4 backdrop-blur-md border-0">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`h-5 w-5 transition-all duration-300 ${
+                    className={`h-4 w-4 md:h-5 md:w-5 transition-all duration-300 ${
                       i < Math.floor(product.rating)
                         ? 'fill-yellow-400 text-yellow-400 animate-pulse'
                         : 'text-gray-300'
@@ -369,22 +369,22 @@ const ProductDetail = () => {
                   />
                 ))}
               </div>
-              <span className="text-lg font-semibold">{product.rating}</span>
-              <Separator orientation="vertical" className="h-6" />
+              <span className="text-base md:text-lg font-semibold">{product.rating}</span>
+              <Separator orientation="vertical" className="h-6 hidden sm:block" />
               <div className="flex items-center gap-1 text-muted-foreground">
-                <Users className="w-4 h-4" />
-                <span>{product.reviews} reviews</span>
+                <Users className="w-3 h-3 md:w-4 md:h-4" />
+                <span className="text-sm md:text-base">{product.reviews} reviews</span>
               </div>
             </div>
 
             {/* Enhanced Price */}
-            <div className="glass-light rounded-2xl p-6 backdrop-blur-md border-0">
-              <div className="flex items-center gap-4 mb-2">
-                <span className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            <div className="glass-light rounded-xl md:rounded-2xl p-4 md:p-6 backdrop-blur-md border-0">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 md:gap-4 mb-2">
+                <span className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                   ${product.price.toFixed(2)}
                 </span>
                 {product.originalPrice && (
-                  <span className="text-xl text-muted-foreground line-through">
+                  <span className="text-lg md:text-xl text-muted-foreground line-through">
                     ${product.originalPrice.toFixed(2)}
                   </span>
                 )}
@@ -392,8 +392,8 @@ const ProductDetail = () => {
               
               {/* Stock Status */}
               <div className="flex items-center gap-2">
-                <div className={`w-3 h-3 rounded-full ${product.inStock ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-                <span className={`text-sm font-medium ${product.inStock ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                <div className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${product.inStock ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
+                <span className={`text-xs md:text-sm font-medium ${product.inStock ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                   {product.inStock ? 'In Stock - Ready to Ship' : 'Out of Stock'}
                 </span>
               </div>
@@ -401,21 +401,21 @@ const ProductDetail = () => {
           </div>
 
           {/* Enhanced Product Options */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {/* Size Selection */}
             {product.sizes.length > 0 && (
-              <div className="glass-light rounded-2xl p-6 backdrop-blur-md border-0">
-                <label className="text-lg font-semibold mb-4 block">
-                  Size {selectedSize && <span className="text-muted-foreground font-normal">- {selectedSize}</span>}
+              <div className="glass-light rounded-xl md:rounded-2xl p-4 md:p-6 backdrop-blur-md border-0">
+                <label className="text-base md:text-lg font-semibold mb-3 md:mb-4 block">
+                  Size {selectedSize && <span className="text-muted-foreground font-normal text-sm md:text-base">- {selectedSize}</span>}
                 </label>
-                <div className="grid grid-cols-6 gap-3">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 md:gap-3">
                   {product.sizes.map((size) => (
                     <Button
                       key={size}
                       variant={selectedSize === size ? "default" : "outline"}
                       size="lg"
                       onClick={() => setSelectedSize(size)}
-                      className={`h-12 transition-all duration-300 ${
+                      className={`h-10 md:h-12 text-sm md:text-base transition-all duration-300 ${
                         selectedSize === size 
                           ? 'glass-strong border-0 shadow-lg scale-105' 
                           : 'glass-light hover:glass hover:scale-105'
@@ -430,23 +430,23 @@ const ProductDetail = () => {
 
             {/* Color Selection */}
             {product.colors.length > 0 && (
-              <div className="glass-light rounded-2xl p-6 backdrop-blur-md border-0">
-                <label className="text-lg font-semibold mb-4 block">
-                  Color {selectedColor && <span className="text-muted-foreground font-normal">- {selectedColor}</span>}
+              <div className="glass-light rounded-xl md:rounded-2xl p-4 md:p-6 backdrop-blur-md border-0">
+                <label className="text-base md:text-lg font-semibold mb-3 md:mb-4 block">
+                  Color {selectedColor && <span className="text-muted-foreground font-normal text-sm md:text-base">- {selectedColor}</span>}
                 </label>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 md:gap-3">
                   {product.colors.map((color) => (
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color)}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
+                      className={`flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 text-sm md:text-base ${
                         selectedColor === color
                           ? 'glass-strong border-white/30 shadow-lg scale-105'
                           : 'glass-light hover:glass hover:scale-105 border-white/20'
                       }`}
                     >
                       <div
-                        className="w-6 h-6 rounded-full border-2 border-white/50 shadow-md"
+                        className="w-4 h-4 md:w-6 md:h-6 rounded-full border-2 border-white/50 shadow-md flex-shrink-0"
                         style={{ backgroundColor: getColorDisplay(color) }}
                       />
                       <span className="font-medium">{color}</span>
@@ -457,81 +457,81 @@ const ProductDetail = () => {
             )}
 
             {/* Quantity */}
-            <div className="glass-light rounded-2xl p-6 backdrop-blur-md border-0">
-              <label className="text-lg font-semibold mb-4 block">Quantity</label>
-              <div className="flex items-center gap-6">
+            <div className="glass-light rounded-xl md:rounded-2xl p-4 md:p-6 backdrop-blur-md border-0">
+              <label className="text-base md:text-lg font-semibold mb-3 md:mb-4 block">Quantity</label>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 md:gap-6">
                 <div className="flex items-center glass-card rounded-xl shadow-lg">
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     disabled={quantity <= 1}
-                    className="glass-hover rounded-l-xl h-12 w-12"
+                    className="glass-hover rounded-l-xl h-10 w-10 md:h-12 md:w-12"
                   >
-                    <Minus className="h-5 w-5" />
+                    <Minus className="h-4 w-4 md:h-5 md:w-5" />
                   </Button>
-                  <span className="px-6 py-3 text-xl font-bold min-w-[4rem] text-center">
+                  <span className="px-4 md:px-6 py-2 md:py-3 text-lg md:text-xl font-bold min-w-[3rem] md:min-w-[4rem] text-center">
                     {quantity}
                   </span>
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() => setQuantity(quantity + 1)}
-                    className="glass-hover rounded-r-xl h-12 w-12"
+                    className="glass-hover rounded-r-xl h-10 w-10 md:h-12 md:w-12"
                   >
-                    <Plus className="h-5 w-5" />
+                    <Plus className="h-4 w-4 md:h-5 md:w-5" />
                   </Button>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-primary">
+                  <span className="text-xl md:text-2xl font-bold text-primary">
                     ${(product.price * quantity).toFixed(2)}
                   </span>
-                  <span className="text-sm text-muted-foreground">total</span>
+                  <span className="text-xs md:text-sm text-muted-foreground">total</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Enhanced Action Buttons */}
-          <div className="space-y-4">
-            <div className="flex gap-4">
+          <div className="space-y-3 md:space-y-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button 
                 size="lg" 
-                className="add-to-cart-btn flex-1 glass-hover h-14 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="add-to-cart-btn flex-1 glass-hover h-12 md:h-14 text-sm md:text-lg font-semibold rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
               >
-                <ShoppingCart className="w-5 h-5 mr-3" />
+                <ShoppingCart className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3" />
                 {product.inStock ? 'Add to Cart' : 'Out of Stock'}
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
                 onClick={handleWishlist} 
-                className="wishlist-btn glass-light hover:glass h-14 w-14 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="wishlist-btn glass-light hover:glass h-12 md:h-14 w-12 md:w-14 rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <Heart className="w-5 h-5" />
+                <Heart className="w-4 h-4 md:w-5 md:h-5" />
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="glass-light hover:glass h-14 w-14 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="glass-light hover:glass h-12 md:h-14 w-12 md:w-14 rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <Share2 className="w-5 h-5" />
+                <Share2 className="w-4 h-4 md:w-5 md:h-5" />
               </Button>
             </div>
 
             <Button 
               variant="outline" 
               size="lg" 
-              className="w-full glass-light hover:glass h-14 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full glass-light hover:glass h-12 md:h-14 text-sm md:text-lg font-semibold rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Buy Now - Fast Checkout
             </Button>
           </div>
 
           {/* Enhanced Features */}
-          <div className="space-y-3">
+          <div className="space-y-2 md:space-y-3">
             {[
               { icon: Truck, text: "Free shipping on orders over $50", color: "text-green-500" },
               { icon: RefreshCw, text: "30-day return policy", color: "text-blue-500" },
@@ -539,14 +539,14 @@ const ProductDetail = () => {
             ].map((feature, index) => (
               <div 
                 key={index}
-                className="feature-card flex items-center gap-4 glass-light rounded-2xl p-4 backdrop-blur-md border-0 hover:glass transition-all duration-300 cursor-pointer text-foreground"
+                className="feature-card flex items-center gap-3 md:gap-4 glass-light rounded-xl md:rounded-2xl p-3 md:p-4 backdrop-blur-md border-0 hover:glass transition-all duration-300 cursor-pointer text-foreground"
                 onMouseEnter={() => setHoveredFeature(feature.text)}
                 onMouseLeave={() => setHoveredFeature(null)}
               >
-                <feature.icon className={`w-6 h-6 ${feature.color} transition-all duration-300 ${
+                <feature.icon className={`w-5 h-5 md:w-6 md:h-6 ${feature.color} transition-all duration-300 flex-shrink-0 ${
                   hoveredFeature === feature.text ? 'scale-110' : ''
                 }`} />
-                <span className="font-medium text-foreground">{feature.text}</span>
+                <span className="font-medium text-foreground text-sm md:text-base">{feature.text}</span>
               </div>
             ))}
           </div>
@@ -555,38 +555,38 @@ const ProductDetail = () => {
 
       {/* Enhanced Product Details Tabs */}
       <div ref={tabsRef}>
-        <Card className="mb-24 glass-card border-0 backdrop-blur-xl shadow-2xl rounded-3xl overflow-hidden">
-          <CardContent className="p-8">
+        <Card className="mb-16 md:mb-20 lg:mb-24 glass-card border-0 backdrop-blur-xl shadow-2xl rounded-2xl md:rounded-3xl overflow-hidden">
+          <CardContent className="p-4 md:p-6 lg:p-8">
             <Tabs defaultValue="description" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 glass-light rounded-2xl p-2 backdrop-blur-md h-14">
-                <TabsTrigger value="description" className="glass-hover rounded-xl h-10 font-semibold">
+              <TabsList className="grid w-full grid-cols-3 glass-light rounded-xl md:rounded-2xl p-1 md:p-2 backdrop-blur-md h-12 md:h-14">
+                <TabsTrigger value="description" className="glass-hover rounded-lg md:rounded-xl h-8 md:h-10 font-semibold text-xs md:text-sm">
                   Description
                 </TabsTrigger>
-                <TabsTrigger value="specifications" className="glass-hover rounded-xl h-10 font-semibold">
+                <TabsTrigger value="specifications" className="glass-hover rounded-lg md:rounded-xl h-8 md:h-10 font-semibold text-xs md:text-sm">
                   Specifications
                 </TabsTrigger>
-                <TabsTrigger value="reviews" className="glass-hover rounded-xl h-10 font-semibold">
+                <TabsTrigger value="reviews" className="glass-hover rounded-lg md:rounded-xl h-8 md:h-10 font-semibold text-xs md:text-sm">
                   Reviews ({product.reviews})
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="description" className="space-y-6 mt-8">
-                <div className="glass-light rounded-2xl p-6 backdrop-blur-md border-0">
-                  <p className="text-lg text-foreground/80 leading-relaxed mb-6">
+              <TabsContent value="description" className="space-y-4 md:space-y-6 mt-6 md:mt-8">
+                <div className="glass-light rounded-xl md:rounded-2xl p-4 md:p-6 backdrop-blur-md border-0">
+                  <p className="text-sm md:text-base lg:text-lg text-foreground/80 leading-relaxed mb-4 md:mb-6">
                     {product.description}
                   </p>
-                  <div className="space-y-4">
-                    <h4 className="text-xl font-semibold text-foreground">Key Features:</h4>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-muted-foreground">
+                  <div className="space-y-3 md:space-y-4">
+                    <h4 className="text-lg md:text-xl font-semibold text-foreground">Key Features:</h4>
+                    <ul className="grid grid-cols-1 gap-2 md:gap-3 text-muted-foreground">
                       {[
                         "Premium quality materials",
                         "Comfortable fit for all-day wear",
                         "Easy care and maintenance",
                         "Sustainable and eco-friendly"
                       ].map((feature, index) => (
-                        <li key={index} className="flex items-center gap-3 glass-light rounded-xl p-3">
-                          <div className="w-2 h-2 bg-primary rounded-full" />
-                          <span className="text-foreground/80">{feature}</span>
+                        <li key={index} className="flex items-center gap-2 md:gap-3 glass-light rounded-lg md:rounded-xl p-2 md:p-3">
+                          <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-primary rounded-full flex-shrink-0" />
+                          <span className="text-foreground/80 text-sm md:text-base">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -594,32 +594,32 @@ const ProductDetail = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="specifications" className="space-y-4 mt-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <h4 className="font-semibold mb-2 text-foreground">Product Details</h4>
-                    <dl className="space-y-2 text-sm">
+              <TabsContent value="specifications" className="space-y-3 md:space-y-4 mt-4 md:mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  <div className="glass-light rounded-xl p-4 md:p-6">
+                    <h4 className="font-semibold mb-3 md:mb-4 text-foreground text-base md:text-lg">Product Details</h4>
+                    <dl className="space-y-2 md:space-y-3 text-sm md:text-base">
                       <div className="flex justify-between">
                         <dt className="text-foreground/70">Brand:</dt>
-                        <dd className="text-foreground">{product.brand}</dd>
+                        <dd className="text-foreground font-medium">{product.brand}</dd>
                       </div>
                       <div className="flex justify-between">
                         <dt className="text-foreground/70">Category:</dt>
-                        <dd className="text-foreground capitalize">{product.category}</dd>
+                        <dd className="text-foreground font-medium capitalize">{product.category}</dd>
                       </div>
                       <div className="flex justify-between">
                         <dt className="text-foreground/70">Available Sizes:</dt>
-                        <dd className="text-foreground">{product.sizes.join(', ')}</dd>
+                        <dd className="text-foreground font-medium">{product.sizes.join(', ')}</dd>
                       </div>
                       <div className="flex justify-between">
                         <dt className="text-foreground/70">Available Colors:</dt>
-                        <dd className="text-foreground">{product.colors.join(', ')}</dd>
+                        <dd className="text-foreground font-medium">{product.colors.join(', ')}</dd>
                       </div>
                     </dl>
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-foreground">Care Instructions</h4>
-                    <ul className="text-sm text-foreground/70 space-y-1">
+                  <div className="glass-light rounded-xl p-4 md:p-6">
+                    <h4 className="font-semibold mb-3 md:mb-4 text-foreground text-base md:text-lg">Care Instructions</h4>
+                    <ul className="text-sm md:text-base text-foreground/70 space-y-1 md:space-y-2">
                       <li>Machine wash cold</li>
                       <li>Tumble dry low</li>
                       <li>Do not bleach</li>
@@ -629,30 +629,32 @@ const ProductDetail = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="reviews" className="space-y-4 mt-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="text-3xl font-bold text-foreground">{product.rating}</div>
-                    <div>
-                      <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`h-4 w-4 ${
-                              i < Math.floor(product.rating)
-                                ? 'fill-yellow-400 text-yellow-400'
-                                : 'text-gray-300'
-                            }`}
-                          />
-                        ))}
+              <TabsContent value="reviews" className="space-y-3 md:space-y-4 mt-4 md:mt-6">
+                <div className="glass-light rounded-xl p-4 md:p-6">
+                  <div className="space-y-3 md:space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-4">
+                      <div className="text-2xl md:text-3xl font-bold text-foreground">{product.rating}</div>
+                      <div>
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-4 w-4 md:h-5 md:w-5 ${
+                                i < Math.floor(product.rating)
+                                  ? 'fill-yellow-400 text-yellow-400'
+                                  : 'text-gray-300'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <p className="text-xs md:text-sm text-foreground/70">Based on {product.reviews} reviews</p>
                       </div>
-                      <p className="text-sm text-foreground/70">Based on {product.reviews} reviews</p>
                     </div>
+                    <Separator />
+                    <p className="text-foreground/70 text-sm md:text-base">
+                      Customer reviews will be displayed here. Reviews help other customers make informed decisions about their purchases.
+                    </p>
                   </div>
-                  <Separator />
-                  <p className="text-foreground/70">
-                    Customer reviews will be displayed here. Reviews help other customers make informed decisions about their purchases.
-                  </p>
                 </div>
               </TabsContent>
             </Tabs>
@@ -663,24 +665,24 @@ const ProductDetail = () => {
       {/* Enhanced Related Products */}
       {relatedProducts.length > 0 && (
         <section ref={relatedRef}>
-          <div className="flex items-center justify-between mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:gap-8 mb-8 md:mb-12">
             <div>
-              <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              <h2 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                 Related Products
               </h2>
-              <p className="text-foreground/70">
+              <p className="text-foreground/70 text-sm md:text-base">
                 You might also like these similar items
               </p>
             </div>
             <Link to={`/shop?category=${product.category}`}>
-              <Button variant="outline" size="lg" className="glass-light hover:glass rounded-2xl">
+              <Button variant="outline" size="lg" className="glass-light hover:glass rounded-xl md:rounded-2xl text-sm md:text-base w-full sm:w-auto">
                 View All {product.category}
                 <ChevronRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </div>
           
-          <div className="related-products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="related-products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
             {relatedProducts.map((relatedProduct) => (
               <div key={relatedProduct.id} className="related-product-card">
                 <ProductCard product={relatedProduct} />
